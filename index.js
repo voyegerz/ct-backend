@@ -22,9 +22,17 @@ const app = express()
 
 const PORT = process.env.PORT || 5000
 
+const corsOptions = {
+    AccessControlAllowOrigin: "*",
+    origin: ["http:95.141.241.35", "http://localhost:3000", "https://thecryptotrades.com"],
+    methods: 'GET,POST,PUT,DELETE,OPTIONS,HEAD,PATCH',
+    credentials: true,
+}
+
+app.use(cors(corsOptions));
 app.use(express.json()); //to parse req.body
 app.use(express.urlencoded({extended: true})) //to parse form data
-app.use(cors({credentials: true, /*origin: "http://localhost:3000"*/}))
+//app.use(cors({credentials: true, /*origin: "http://localhost:3000"*/}))
 app.use(upload())
 app.use('/uploads', express.static(__dirname + '/uploads'))
 app.use(cookieParser())
